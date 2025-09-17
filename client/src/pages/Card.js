@@ -60,7 +60,7 @@ const Card = () => {
                 >
                   {item.discountPercent > 0 && (
                     <span
-                      className="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 rounded-end"
+                      className="position-absolute top-0 start-0 text-white px-2 py-1 rounded-end discount-ribbon"
                       style={{ fontSize: '0.85rem' }}
                     >
                       {item.discountPercent}٪ تخفیف

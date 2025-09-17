@@ -20,21 +20,32 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="d-flex justify-content-between align-items-center px-3 py-2 border-bottom" style={{ backgroundColor: '#FAF3E0' }}>
-        <div className="d-flex gap-3 position-relative">
+      <div style={{ height: '30px' }}></div>
 
+      <nav
+        className="d-flex justify-content-between align-items-center px-3 py-2 border-bottom"
+        style={{
+          backgroundColor: '#FAF3E0',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          zIndex: 1100
+        }}
+      >
+        <div className="d-flex gap-3 position-relative">
           <motion.div
             animate={favoriteAnimate ? { scale: [1, 1.3, 1] } : {}}
             transition={{ duration: 0.4 }}
           >
-          <Link to="/wishlist" className="text-danger position-relative">
-            <FontAwesomeIcon icon={faHeartRegular} size="lg" />
-            {favoritesCount > 0 && (
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {favoritesCount}
-              </span>
-            )}
-          </Link>
+            <Link to="/wishlist" className="text-danger position-relative">
+              <FontAwesomeIcon icon={faHeartRegular} size="lg" />
+              {favoritesCount > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {favoritesCount}
+                </span>
+              )}
+            </Link>
           </motion.div>
 
           <motion.div
@@ -75,7 +86,7 @@ const Navbar = () => {
                 backgroundColor: 'rgba(0, 0, 0, 0.3)',
                 backdropFilter: 'blur(5px)',
                 WebkitBackdropFilter: 'blur(5px)',
-                zIndex: 1040,
+                zIndex: 1040
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -91,6 +102,7 @@ const Navbar = () => {
               exit={{ x: '100%' }}
               transition={{ duration: 0.3 }}
             >
+              <div style={{ height: '20px' }}></div>
               <button onClick={toggleSidebar} className="btn btn-sm btn-danger m-3 ms-auto d-block">-</button>
               <ul className="list-unstyled text-end pe-3">
                 <li onClick={closeSidebar}><Link to="/" className="d-block py-2 text-dark text-decoration-none"><b>محصولات</b></Link></li>
