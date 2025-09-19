@@ -11,8 +11,8 @@ const Wishlist = () => {
   
 
   return (   
-    <div className='container my-4 text-center'>
-      <h3 className='m-2' style={{fontFamily: "Amiri"}}><span style={{color: "#8B0000"}}>❤</span> علاقه‌ مندی‌ها</h3>
+    <div className='row container   text-center my-4'>
+      <h3 className='m-2' style={{fontFamily: "Amiri"}}>❤️ علاقه‌ مندی‌ها</h3>
       {favorites.length === 0 ? (
         <div>
           <p className='m-2' style={{
@@ -23,7 +23,7 @@ const Wishlist = () => {
           }}>لیست علاقه‌مندی‌هات هنوز خالیه</p>
           <p className='m-2'style={{
               fontFamily: "Amiri",
-              fontSize: '1rem',
+              fontSize: '1.1rem',
               color: '#2c2c2c',
               lineHeight: '2rem'
           }}>همین حالا محصولاتی که چشمتو گرفت رو به این لیست اضافه کن تا هر وقت خواستی راحت پیداشون کنی</p>
