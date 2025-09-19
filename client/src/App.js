@@ -12,6 +12,10 @@ import { CartProvider } from './Context/CartContext';
 import { FavoritesProvider } from './Context/FavoritesContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "@fontsource/vazirmatn/400.css";
+import "@fontsource/vazirmatn/700.css";
+import "@fontsource/lalezar/400.css";
+
 
 function App() {
   return (

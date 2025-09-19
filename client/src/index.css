@@ -1,8 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--bs-font-sans-serif);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,3 +10,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.center-select {
+  text-align: center;             
+  text-align-last: center;        
+  -moz-text-align-last: center;   
+}
+.center-select option {
+  text-align: center;             
+}
+
+
+:root{
+  --bs-font-sans-serif: "Vazirmatn", system-ui, -apple-system, "Segoe UI",
+                        Roboto, "Helvetica Neue", Arial, "Noto Sans",
+                        "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --brand-navy: #1C1F33;
+  --brand-navy-rgb: 28,31,51;
+
+  /* برای input ها */
+  --bs-form-control-focus-border-color: var(--brand-navy);
+  --bs-form-control-focus-box-shadow: 0 0 0 .25rem rgba(var(--brand-navy-rgb), .25);
+
+  /* برای select ها */
+  --bs-form-select-focus-border-color: var(--brand-navy);
+  --bs-form-select-focus-box-shadow: 0 0 0 .25rem rgba(var(--brand-navy-rgb), .25);
+}
+
+

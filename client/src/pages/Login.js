@@ -5,18 +5,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
+// الگوی موبایل ایران: 09xxxxxxxxx یا +989xxxxxxxxx
+const iranMobileRegex = /^(\+98|0)?9\d{9}$/;
+
 const schema = yup.object().shape({
-  email: yup.string().email('ایمیل نامعتبر است').required('ایمیل الزامی است'),
-  password: yup.string().min(6, 'رمز عبور باید حداقل ۶ کاراکتر باشد').required('رمز عبور الزامی است'),
+  phone: yup
+    .string()
+    .required('شماره تماس الزامی است')
+    .test('is-valid-ir-mobile', 'شماره تماس نامعتبر است', (value = '') =>
+      iranMobileRegex.test(value.replace(/\s|-/g, ''))
+    ),
+  password: yup
+    .string()
+    .min(6, 'رمز عبور باید حداقل ۶ کاراکتر باشد')
+    .required('رمز عبور الزامی است'),
 });
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -31,13 +37,14 @@ const Login = () => {
       <h2 className="mb-4 text-end">ورود</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="mb-3 text-end">
-          <label className="form-label d-block">ایمیل</label>
+          <label className="form-label d-block">شماره تماس</label>
           <input
-            type="email"
+            type="tel"
+            inputMode="numeric"
             className="form-control text-end"
-            {...register('email')}
+            {...register('phone')}
           />
-          {errors.email && <p className="text-danger mt-1">{errors.email.message}</p>}
+          {errors.phone && <p className="text-danger mt-1">{errors.phone.message}</p>}
         </div>
 
         <div className="mb-3 text-end">

@@ -1,12 +1,24 @@
+// src/pages/Register.js
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
+// 09xxxxxxxxx یا +989xxxxxxxxx
+const iranMobileRegex = /^(\+98|0)?9\d{9}$/;
+
 const schema = yup.object().shape({
-  email: yup.string().email('ایمیل نامعتبر است').required('ایمیل الزامی است'),
-  password: yup.string().min(6, 'رمز باید حداقل 6 کاراکتر باشد').required('رمز عبور الزامی است'),
+  phone: yup
+    .string()
+    .required('شماره تماس الزامی است')
+    .test('is-valid-ir-mobile', 'شماره تماس نامعتبر است', (value = '') =>
+      iranMobileRegex.test(value.replace(/\s|-/g, ''))
+    ),
+  password: yup
+    .string()
+    .min(6, 'رمز باید حداقل 6 کاراکتر باشد')
+    .required('رمز عبور الزامی است'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'تکرار رمز عبور باید با رمز عبور یکسان باشد')
@@ -14,17 +26,17 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    // نرمال‌سازی شماره (حذف فاصله/خط تیره)
+    const normalized = {
+      ...data,
+      phone: data.phone.replace(/\s|-/g, ''),
+    };
+    console.log(normalized);
     toast.success('ثبت‌نام موفقیت‌آمیز بود!');
     reset();
   };
@@ -34,9 +46,14 @@ function Register() {
       <h2 className="mb-4 text-end">ثبت‌نام</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="mb-3 text-end">
-          <label className="form-label d-block">ایمیل</label>
-          <input type="email" className="form-control text-end" {...register('email')} />
-          {errors.email && <p className="text-danger mt-1">{errors.email.message}</p>}
+          <label className="form-label d-block">شماره تماس</label>
+          <input
+            type="tel"
+            inputMode="numeric"
+            className="form-control text-end"
+            {...register('phone')}
+          />
+          {errors.phone && <p className="text-danger mt-1">{errors.phone.message}</p>}
         </div>
 
         <div className="mb-3 text-end">

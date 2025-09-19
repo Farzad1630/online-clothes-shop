@@ -6,6 +6,10 @@ import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { CartContext } from '../Context/CartContext';
 import { FavoritesContext } from '../Context/FavoritesContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import "@fontsource/vazirmatn/400.css";
+import "@fontsource/vazirmatn/700.css";
+import "@fontsource/lalezar/400.css";
+
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -38,10 +42,10 @@ const Navbar = () => {
             animate={favoriteAnimate ? { scale: [1, 1.3, 1] } : {}}
             transition={{ duration: 0.4 }}
           >
-            <Link to="/wishlist" className="text-danger position-relative">
+            <Link to="/wishlist" className=" position-relative " style={{color: "rgba(28, 31, 51)"}}>
               <FontAwesomeIcon icon={faHeartRegular} size="lg" />
               {favoritesCount > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{backgroundColor: "#8B0000"}}>
                   {favoritesCount}
                 </span>
               )}
@@ -52,10 +56,10 @@ const Navbar = () => {
             animate={cartAnimate ? { scale: [1, 1.3, 1] } : {}}
             transition={{ duration: 0.4 }}
           >
-            <Link to="/card" className="text-dark position-relative">
+            <Link to="/card" className="text-dark position-relative" style={{color: "rgba(28, 31, 51)"}} >
               <FontAwesomeIcon icon={faShoppingCart} size="lg" />
               {cartCount > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{backgroundColor: "#8B0000"}}>
                   {cartCount}
                 </span>
               )}
@@ -64,7 +68,7 @@ const Navbar = () => {
         </div>
 
         <div>
-          <Link to="/" className="colorClass fw-bold fs-4 text-decoration-none">
+          <Link to="/" className="colorClass fw-bold fs-4 text-decoration-none brand-title m-0">
             ASA
           </Link>
         </div>

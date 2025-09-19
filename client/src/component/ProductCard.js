@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { faCartPlus as faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -6,11 +6,12 @@ import { CartContext } from '../Context/CartContext';
 import { FavoritesContext } from '../Context/FavoritesContext';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const customStyles = {
   control: (base, state) => ({
     ...base,
+    textAlign: 'center',
     backgroundColor: '#FAF3E0',
     borderColor: state.isFocused ? '#001f3f' : '#ccc',
     boxShadow: state.isFocused ? '0 0 0 0.2rem rgba(0, 31, 63, 0.25)' : null,
@@ -20,10 +21,12 @@ const customStyles = {
   }),
   singleValue: (base) => ({
     ...base,
+    textAlign: 'center',
     color: '#001f3f',
   }),
   option: (base, state) => ({
     ...base,
+    textAlign: 'center',
     backgroundColor: state.isFocused ? '#f0e3c4' : '#FAF3E0',
     color: '#001f3f',
     '&:active': {
@@ -32,11 +35,16 @@ const customStyles = {
   }),
   menu: (base) => ({
     ...base,
+    textAlign: 'center',
     backgroundColor: '#FAF3E0',
     border: '1px solid #001f3f',
     zIndex: 9999,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: 'max-content',
+    minWidth: '100%',
   }),
-  menuPortal: base => ({ ...base, zIndex: 9999 })
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
 };
 
 const ProductCard = ({ product }) => {
@@ -47,14 +55,22 @@ const ProductCard = ({ product }) => {
   const firstAvailableSize = product.sizes?.find(s => s.stock > 0)?.size || '';
   const [selectedSize, setSelectedSize] = useState(firstAvailableSize);
 
+  const prefersReduced = useReducedMotion();
+
+  const hoverProps =
+    !prefersReduced
+      ? { whileHover: { scale: 1.03, boxShadow: '0 6px 12px rgba(0,0,0,0.15)' }, transition: { type: 'spring', stiffness: 300 } }
+      : {};
+
   return (
     <motion.div
-      whileHover={{ scale: 1.03, boxShadow: '0 6px 12px rgba(0,0,0,0.15)' }}
+      {...hoverProps}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 300 }}
       className="card h-100 text-center shadow-sm d-flex flex-column justify-content-between"
       style={{
         backgroundColor: '#FAF3E0',
-        boxShadow: '0 4px 6px rgba(200, 180, 150, 1)'
+        boxShadow: '0 4px 6px rgba(200, 180, 150, 1)',
       }}
     >
       {product.discountPercent > 0 && (
@@ -88,12 +104,12 @@ const ProductCard = ({ product }) => {
 
         {product.sizes && (
           <div className="my-2">
-            <label className="form-label">سایز:</label>
+            <label className="form-label" >سایز:</label>
             <Select
               options={product.sizes.map(size => ({
                 value: size.size,
                 label: `${size.size}${size.stock === 0 ? ' (ناموجود)' : ''}`,
-                isDisabled: size.stock === 0
+                isDisabled: size.stock === 0,
               }))}
               value={{ value: selectedSize, label: selectedSize }}
               onChange={(selectedOption) => setSelectedSize(selectedOption.value)}
@@ -139,11 +155,12 @@ const ProductCard = ({ product }) => {
             triggerCartAnimation();
             toast.success("محصول به سبد خرید اضافه شد");
           }}>
-            <FontAwesomeIcon icon={faShoppingCart} className="me-2 bg-navy" />
+            <FontAwesomeIcon icon={faShoppingCart} className="me-2" />
             افزودن به سبد
           </button>
         </div>
       </div>
+
     </motion.div>
   );
 };

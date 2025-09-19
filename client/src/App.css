@@ -3,7 +3,7 @@ body, html, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "serif";
 }
 
 
@@ -21,10 +21,11 @@ body, html, #root {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 15vw;
-  color: #1C1F33; /* رنگ تیره‌تر با شفافیت کم */
+  color: rgba(28, 31, 51, .7);/* رنگ تیره‌تر با شفافیت کم */
   z-index: 0;
   pointer-events: none;
   white-space: nowrap;
+  
 }
 
 .container, .card, nav, header, main, footer {
@@ -98,4 +99,22 @@ body, html, #root {
   border: 1px solid #1C1F33;
 }
 
+
+.brand-title{
+  font-family: "serif";
+  font-weight: 400;
+  letter-spacing: .5px;   
+  line-height: 1;
+}
+
+
+.form-control:focus,
+.form-select:focus{
+  border-color: #1C1F33 !important;
+  box-shadow: 0 0 0 .15rem rgba(28,31,51,.5) !important;
+  outline: none;
+}
+.option-select:focus{
+  background-color: rgba(28,31,51) !important;
+}
 

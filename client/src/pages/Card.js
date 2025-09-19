@@ -35,31 +35,30 @@ const Card = () => {
 
   return (
     <div className="container my-4">
-      <h2 className="mb-4 text-center">🛒 سبد خرید</h2>
+      <h3 className="mb-4 text-center" style={{fontFamily:"Amiri"}}>🛒 سبد خرید</h3>
 
       {cartItems.length === 0 ? (
         <p className="text-center" style={{
-          fontFamily: "'Vazirmatn', sans-serif",
-          fontSize: '1.4rem',
+          fontFamily: "Amiri",
+          fontSize: '1rem',
           color: '#2c2c2c',
           lineHeight: '2rem'
-              }}>سبد خریدت الان خالیه، ولی همین حالا می‌تونی بهترین‌ها رو برای خودت انتخاب کنی.
+              }}>سبد خریدت الان خالیه، ولی همین حالا می‌تونی بهترین‌ها رو برای خودت انتخاب کنی<br></br>
             ما اینجاییم تا با کلی پیشنهاد جذاب، لبخند رو بهت هدیه بدیم</p>
       ) : (
         <>
           <div className="row text-center">
             {cartItems.map((item) => (
               <div key={item.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                <div
+                <div 
                   className="card h-100 text-center shadow-sm d-flex flex-column justify-content-between"
                   style={{
-                    backgroundColor: 'rgba(255, 253, 208, .9)',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
+                    backgroundColor: 'rgba(255, 253, 208, .7)',
+                    boxShadow: '0 4px 6px rgba(200, 180, 150, 1)'
                   }}
                 >
                   {item.discountPercent > 0 && (
-                    <span
+                    <span     
                       className="position-absolute top-0 start-0 text-white px-2 py-1 rounded-end discount-ribbon"
                       style={{ fontSize: '0.85rem' }}
                     >

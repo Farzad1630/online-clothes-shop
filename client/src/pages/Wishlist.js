@@ -3,29 +3,30 @@ import React, { useContext } from 'react';
 import { FavoritesContext } from '../Context/FavoritesContext';
 import ProductCard from '../component/ProductCard';
 import { CartContext } from '../Context/CartContext';
+import { toast } from 'react-toastify';
 
 const Wishlist = () => {
   const { favorites, removeFromFavorites } = useContext(FavoritesContext);
-    const { addToCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   
 
-  return (
-    <div className='row text-center'>
-      <h2 className='m-2'>❤️ علاقه‌مندی‌ها</h2>
+  return (   
+    <div className='container my-4 text-center'>
+      <h3 className='m-2' style={{fontFamily: "Amiri"}}><span style={{color: "#8B0000"}}>❤</span> علاقه‌ مندی‌ها</h3>
       {favorites.length === 0 ? (
         <div>
           <p className='m-2' style={{
-              fontFamily: "'Vazirmatn', sans-serif",
-              fontSize: '1.4rem',
+              fontFamily: "Amiri",
+              fontSize: '1.1rem',
               color: '#2c2c2c',
               lineHeight: '2rem'
           }}>لیست علاقه‌مندی‌هات هنوز خالیه</p>
           <p className='m-2'style={{
-              fontFamily: "'Vazirmatn', sans-serif",
-              fontSize: '1.4rem',
+              fontFamily: "Amiri",
+              fontSize: '1rem',
               color: '#2c2c2c',
               lineHeight: '2rem'
-          }}>!همین حالا محصولاتی که چشمتو گرفت رو به این لیست اضافه کن تا هر وقت خواستی راحت پیداشون کنی</p>
+          }}>همین حالا محصولاتی که چشمتو گرفت رو به این لیست اضافه کن تا هر وقت خواستی راحت پیداشون کنی</p>
         </div>
       ) : (
         favorites.map((item) => (
@@ -70,10 +71,14 @@ const Wishlist = () => {
 
 
                 <div className="d-flex justify-content-center align-items-center gap-2">
-                    <button className="btn btn-outline-danger" onClick={() => removeFromFavorites(item.id, item.selectedSize)}>
+                    <button className="btn btn-outline-danger" onClick={() => {removeFromFavorites(item.id, item.selectedSize);
+                      }}>
                     -
                     </button>
-                    <button className="btn btn-outline-success" onClick={() => addToCart(item)}>
+                    <button className="btn btn-outline-success" onClick={() => {
+                        addToCart(item);
+                        toast.success("محصول به سبد خرید اضافه شد");
+                      }}>
                         افزودن به سبد
                     </button>
                 </div>
